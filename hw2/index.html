@@ -1,116 +1,356 @@
 <html>
-	<head>
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-		<style>
-			h1 {
-				text-align: center;
-			}
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      h1 {
+        text-align: center;
+      }
 
-			.container {
-				margin: 0 auto;
-				padding: 60px 20%;
-			}
+      .container {
+        margin: 0 auto;
+        padding: 60px 20%;
+      }
 
-			figure {
-				text-align: center;
-			}
+      figure {
+        text-align: center;
+      }
 
-			img {
-				display: inline-block;
-			}
+      img {
+        display: inline-block;
+      }
 
-			body {
-				font-family: 'Inter', sans-serif;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container">
-		<h1>CS184/284A Spring 2025 Homework 2 Write-Up</h1>
-		<div style="text-align: center;">Names: </div>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>CS184/284A Spring 2025 Homework 2 Write-Up</h1>
+      <div style="text-align: center">Names: Andy Zhang</div>
 
-		<br>
+      <br />
 
-		Link to webpage: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">cs184.eecs.berkeley.edu/sp25</a>
+      Link to webpage:
+      <a href="https://github.com/cal-cs184-student/hw-webpages-zhangnd16"
+        >https://github.com/cal-cs184-student/hw-webpages-zhangnd16</a
+      >
 
-		<br>
-		
-		Link to GitHub repository: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">cs184.eecs.berkeley.edu/sp25</a>
+      <br />
 
-		<figure>
-			<img src="teapot.png" alt="Teapot" style="width:50%"/>
-			<figcaption>You can add images with captions!</figcaption>
-		</figure>
+      Link to GitHub repository:
+      <a href="https://github.com/cal-cs184-student/sp25-hw2-mondrian"
+        >https://github.com/cal-cs184-student/sp25-hw2-mondrian</a
+      >
 
-		<!--
+      <figure>
+        <img src="teapot.png" alt="Teapot" style="width: 50%" />
+      </figure>
+
+      <!--
 		We've already added one heading per part, to make your write-up as navigable when grading. Please fit your write-up within these sections!
 		-->
 
-		<h2>Overview</h2>
-		Give a high-level overview of what you implemented in this homework. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the homework.
+      <h2>Overview</h2>
+      Give a high-level overview of what you implemented in this homework. Think
+      about what you've built as a whole. Share your thoughts on what
+      interesting things you've learned from completing the homework.
 
-		<h2>Section I: Bezier Curves and Surfaces</h2>
+      <h2>Section I: Bezier Curves and Surfaces</h2>
 
-		<h3>Part 1: Bezier curves with 1D de Casteljau subdivision</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <h3>Part 1: Bezier curves with 1D de Casteljau subdivision</h3>
+      De Casteljau's algorithm is an iterative method to generate Bezier curves.
+      Given a list of n vertices and a lerp value \(0 &lt t &lt 1\), for each
+      pair of adjacent vertices, generate n-1 intermediate lerp vertices.
+      Iteratively perform this step until n=1, where there is the final point on
+      the Bezier curve. Repeat the process for all t values between 0 and 1, and
+      the set of all final points consist to the desired Bezier curve.
 
-		<p>Here is an example 2x2 gridlike structure using an HTML table. Each <b>tr</b> is a row and each <b>td</b> is a column in that row. You might find this useful for framing and showing your result images in an organized fashion.</p>
-		<div style="display: flex; flex-direction: column; align-items: center;">
-			<table style="width: 100%; text-align: center; border-collapse: collapse;">
-			  <tr>
-				<td style="text-align: center;">
-				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-				<td style="text-align: center;">
-				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-			  </tr>
-			  <tr>
-				<td style="text-align: center;">
-				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-				<td style="text-align: center;">
-				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
-				</td>
-			  </tr>
-			</table>
-		</div>
+      <p>
+        Below is a Bezier curve with 6 control points and another slightly
+        different modified one.
+      </p>
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <table
+          style="width: 100%; text-align: center; border-collapse: collapse"
+        >
+          <tr>
+            <td style="text-align: center">
+              <img src="task1_1.png" width="400px" />
+              <figcaption>A Bezier curve with 6 control points</figcaption>
+            </td>
+            <td style="text-align: center">
+              <img src="task1_2.png" width="400px" />
+              <figcaption>
+                A slightly adjusted Bezier curve with modified t value
+              </figcaption>
+            </td>
+          </tr>
+        </table>
+      </div>
 
-		<h3>Part 2: Bezier surfaces with separable 1D de Casteljau</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <h3>Part 2: Bezier surfaces with separable 1D de Casteljau</h3>
+      To generate a Bezier surface on a set of n * n control points, consider n
+      Bezier curve generated with n rows, each row with n control points. Taking
+      the point on each Bezier curve with parameter u, one can generate another
+      Bezier curve using these points as control points. With a parameter v, one
+      can calculate a point on the "second-order" Bezier curve, which is on the
+      Bezier surface. With all possible (u, v), both between 0 and 1, one can
+      generate all points to form the Bezier surface.
 
-		<h2>Section II: Triangle Meshes and Half-Edge Data Structure</h2>
+      <figure>
+        <img src="task2.png" style="width: 50%" />
+        <figcaption>A teapot formed with Bezier surfaces</figcaption>
+      </figure>
 
-		<h3>Part 3: Area-weighted vertex normals</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <h2>Section II: Triangle Meshes and Half-Edge Data Structure</h2>
 
-		<h3>Part 4: Edge flip</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <h3>Part 3: Area-weighted vertex normals</h3>
+      To calculate the area-weighted vertex normals for a vertex, one should sum
+      up all normal vectors of the faces around the vertex. To calculate the
+      normal vector of one of the faces, start from one of the halfedge of the
+      vertex, take the vertex of the halfedge, the vertex of the next halfedge
+      (halfedge->next()), and the vertex of the second next halfedge
+      (halfedge->next()->next()). These three vertices consist to the triangle
+      face, and one can calculate the normal vector by taking cross product of
+      the differences of these vectors.
+      <br /><br />
+      To traverse to the next face, take next halfedge of the halfedge's twin
+      component (halfedge->twin()->next()). Repeat the process above for each
+      face around the vertex and sum up the normal vectors, and normalize the
+      sum to get the desired result.
 
-		<h3>Part 5: Edge split</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <table
+          style="width: 100%; text-align: center; border-collapse: collapse"
+        >
+          <tr>
+            <td style="text-align: center">
+              <img src="task3_1.png" width="400px" />
+              <figcaption>Teapot with flat shading</figcaption>
+            </td>
+            <td style="text-align: center">
+              <img src="task3_2.png" width="400px" />
+              <figcaption>Teapot with Phong shading</figcaption>
+            </td>
+          </tr>
+        </table>
+      </div>
 
-		<h3>Part 6: Loop subdivision for mesh upsampling</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <h3>Part 4: Edge flip</h3>
+      To perform an edge flip, notice that no new edges are created, therefore
+      the assignments between halfedges and edges, also halfedges and their twin
+      complements are unchanged after a edge flip. Therefore, we can just worry
+      about next, vertex, face of halfedges, and the halfedge assignments of
+      vertex and face. One should be very careful about the next component of
+      the halfedge, and make sure that they form a proper loop within a face. I
+      encountered a bug when I tried to flip an edge, the program just froze. It
+      turns out to be that I was not following the halfedge's next assignments,
+      and I did not the proper halfedge's next pointer to the flipped halfedge,
+      therefore causing an infinite loop.
 
-		<h2>(Optional) Section III: Potential Extra Credit - Art Competition: Model something Creative</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <table
+          style="width: 100%; text-align: center; border-collapse: collapse"
+        >
+          <tr>
+            <td style="text-align: center">
+              <img src="task4_1.png" width="400px" />
+              <figcaption>Original teapot</figcaption>
+            </td>
+            <td style="text-align: center">
+              <img src="task4_2.png" width="400px" />
+              <figcaption>Teapot with a flip at the center</figcaption>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: center">
+              <img src="task4_3.png" width="400px" />
+              <figcaption>Teapot with more edge filps</figcaption>
+            </td>
+          </tr>
+        </table>
+      </div>
 
-		<h2>Additional Notes (please remove)</h2>
-		<ul>
-			<li>You can also add code if you'd like as so: <code>code code code</code></li>
-			<li>If you'd like to add math equations, 
-				<ul>
-					<li>You can write inline equations like so: \( a^2 + b^2 = c^2 \)</li>
-					<li>You can write display equations like so: \[ a^2 + b^2 = c^2 \]</li>
-				</ul>
-			</li>
-		</ul>
-		</div>
-	</body>
+      <h3>Part 5: Edge split</h3>
+      To perform an edge split is more complicated than an edge flip, as many
+      new elements are created. A new vertex, three new edges, six new
+      halfedges, and two new faces are created and needed to be assigned to the
+      proper elements. For this part, as things become more complicated, I just
+      wrote down all parts that are in the given mesh and assigned everything
+      needed to each component to avoid any potential bugs. I wrote each
+      variable name as the example picture in the instruction (e.g.,
+      halfedgebc). I also found a helper function to assign elements to halfedge
+      is very helpful, as there are many repetitious similar assignments for
+      halfedges.
+
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <table
+          style="width: 100%; text-align: center; border-collapse: collapse"
+        >
+          <tr>
+            <td style="text-align: center">
+              <img src="task5_1.png" width="400px" />
+              <figcaption>Original cube</figcaption>
+            </td>
+            <td style="text-align: center">
+              <img src="task5_2.png" width="400px" />
+              <figcaption>Cube with some edge splits</figcaption>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: center">
+              <img src="task5_3.png" width="400px" />
+              <figcaption>Cube with some edge splits and flips</figcaption>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <h3>Part 6: Loop subdivision for mesh upsampling</h3>
+      To perform loop subdivision, I follow the instructions to store the new
+      positions into the old vertex and positions of new vertex into their
+      corresponding edges and I found it much easier to traverse the mesh before
+      the subdivision. Then, to split all edges in the original mesh and avoid
+      splitting any new edges, I first record all edges into a vector and split
+      all edges in that vector. To identify all new edges, after an edge
+      splitting, find the edges that do not connect to an old vertex. After this
+      is to flip all new edges connecting a new vertex and an old vertex. Last,
+      update the positions of all vertices. I encountered a bug where all the
+      new vertices ending up to have a position at the origin. It turns out that
+      I assigned the new position to the position attribute of the new vertex,
+      immediately after the edge flipping, which is overrided by the position
+      updating later.
+
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <table
+          style="width: 100%; text-align: center; border-collapse: collapse"
+        >
+          <tr>
+            <td style="text-align: center">
+              <img src="task6_1.png" width="400px" />
+              <figcaption>Original bean</figcaption>
+            </td>
+            <td style="text-align: center">
+              <img src="task6_2.png" width="400px" />
+              <figcaption>Bean after one loop subdivision</figcaption>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      After loop subdivision, all sharp corners and edges become much smoother.
+      This is because the position of the sharp vertices are taken average with
+      less-sharp vertices adjacent to them. This effect can be reduced by
+      pre-splitting all adjacent edges to sharp vertex. Below is an example of a
+      loop subdivision on a cube,comparing with no pre-splitting, and with
+      pre-splitting on each edge adjacent to the sharp vertex at the upper
+      right. It is evident from the below that pre-splitting on edges near the
+      sharp vertices can reduce the smoothing effect of loop division.
+
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <table
+          style="width: 100%; text-align: center; border-collapse: collapse"
+        >
+          <tr>
+            <td style="text-align: center">
+              <img src="task6_3.png" width="400px" />
+              <figcaption>Original cube</figcaption>
+            </td>
+            <td style="text-align: center">
+              <img src="task6_4.png" width="400px" />
+              <figcaption>
+                The cube after one loop subdivision, with sharp vertices on the
+                upper right and bottom left
+              </figcaption>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: center">
+              <img src="task6_5.png" width="400px" />
+              <figcaption>
+                The cube with pre-splitting around the upper right vertex, then
+                loop subdivision
+              </figcaption>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <br /><br />
+      From the above example, one can also notice that the cube becomes
+      asymmetric after the loop division, despite the cube itself is symmetric
+      around the origin. This is because the vertices-edges topology is not
+      symmetric. One can preprocess the cube to make the vertices-edges topology
+      symmetric with some edge splitting, and the resulting mesh after loop
+      subdivision would become symmetric as desired.
+
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <table
+          style="width: 100%; text-align: center; border-collapse: collapse"
+        >
+          <tr>
+            <td style="text-align: center">
+              <img src="task6_3.png" width="400px" />
+              <figcaption>Original cube</figcaption>
+            </td>
+            <td style="text-align: center">
+              <img src="task6_4.png" width="400px" />
+              <figcaption>
+                Cube after one loop subdivision, asymmetric
+              </figcaption>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: center">
+              <img src="task6_6.png" width="400px" />
+              <figcaption>
+                Cube after two loop subdivision, asymmetric
+              </figcaption>
+            </td>
+            <td style="text-align: center">
+              <img src="task6_7.png" width="400px" />
+              <figcaption>
+                Cube after three loop subdivision, asymmetric
+              </figcaption>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <br /><br />
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <table
+          style="width: 100%; text-align: center; border-collapse: collapse"
+        >
+          <tr>
+            <td style="text-align: center">
+              <img src="task6_8.png" width="400px" />
+              <figcaption>
+                Cube with some edge spliting and with symmetric graph topology
+              </figcaption>
+            </td>
+            <td style="text-align: center">
+              <img src="task6_9.png" width="400px" />
+              <figcaption>Adjusted cube after one loop subdivision</figcaption>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align: center">
+              <img src="task6_10.png" width="400px" />
+              <figcaption>Adjusted cube after two loop subdivision</figcaption>
+            </td>
+            <td style="text-align: center">
+              <img src="task6_11.png" width="400px" />
+              <figcaption>
+                Adjusted cube after three loop subdivision
+              </figcaption>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
 </html>
